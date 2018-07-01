@@ -326,35 +326,13 @@
       "defaultValue": "[parameters('solrConnectionString')]"
     },
 
-    "applicationInsightsName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-ai')]"
-    },
-    "applicationInsightsLocation": {
-      "type": "string",
-      "defaultValue": "East US"
-    },
-    "applicationInsightsPricePlan": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-ai-pp')]"
-    },
-    "applicationInsightsCurrentBillingFeatures": {
-      "type": "string",
-      "defaultValue": "Basic",
-      "allowedValues": [ "Basic", "Application Insights Enterprise" ]
-    },
-    "applicationInsightsDataVolumeCap": {
-      "type": "string",
-      "defaultValue": "0.33"
-    },
-
     "xcSingleHostingPlanName": {
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-xc-single-hp')]"
     },
+
+
     "xcSingleHostingPlanSkuName": {
       "type": "string",
       "defaultValue": "S1"
@@ -368,6 +346,11 @@
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-single-hp')]"
+    },
+    "CDHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-single-CD')]"
     },
     "singleHostingPlanSkuName": {
       "type": "string",
@@ -425,7 +408,7 @@
       "allowedValues": [ "CustomSMTP", "EmailCloud" ],
       "defaultValue": "CustomSMTP"
     },
-    
+
     "exmCryptographicKey": {
       "type": "securestring",
       "minLength": 64,
@@ -435,7 +418,7 @@
       "type": "securestring",
       "minLength": 64,
       "defaultValue": "[toUpper(replace(concat(guid(uniqueString('exmAuthenticationKey', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), guid(uniqueString('exmAuthenticationKey', parameters('sqlServerPassword'), parameters('passwordSalt')))), '-',''))]"
-    }, 
+    },
 
     "xcServerConfigurationEnvironment": {
       "type": "string",
@@ -545,23 +528,6 @@
           "searchServicePartitionCount": {
             "value": "[parameters('searchServicePartitionCount')]"
           },
-
-          "applicationInsightsName": {
-            "value": "[parameters('applicationInsightsName')]"
-          },
-          "applicationInsightsLocation": {
-            "value": "[parameters('applicationInsightsLocation')]"
-          },
-          "applicationInsightsPricePlan": {
-            "value": "[parameters('applicationInsightsPricePlan')]"
-          },
-          "applicationInsightsCurrentBillingFeatures": {
-            "value": "[parameters('applicationInsightsCurrentBillingFeatures')]"
-          },
-          "applicationInsightsDataVolumeCap": {
-            "value": "[parameters('applicationInsightsDataVolumeCap')]"
-          },
-
           "singleHostingPlanName": {
             "value": "[parameters('singleHostingPlanName')]"
           },
@@ -794,10 +760,6 @@
             "value": "[parameters('solrConnectionString')]"
           },
           
-          "applicationInsightsName": {
-            "value": "[parameters('applicationInsightsName')]"
-          },
-
           "singleWebAppName": {
             "value": "[parameters('singleWebAppName')]"
           },
@@ -939,10 +901,6 @@
             "value": "[parameters('xcSolrConnectionString')]"
           },
 
-          "applicationInsightsName": {
-            "value": "[parameters('applicationInsightsName')]"
-          },
-
           "xcSingleWebAppName": {
             "value": "[parameters('xcSingleWebAppName')]"
           },
@@ -1051,9 +1009,6 @@
 
               "solrConnectionString": "[parameters('solrConnectionString')]",
               "xcSolrConnectionString": "[parameters('xcSolrConnectionString')]",
-              
-              "applicationInsightsName": "[parameters('applicationInsightsName')]",
-              "applicationInsightsLocation": "[parameters('applicationInsightsLocation')]",
 
               "xcSingleHostingPlanName": "[parameters('xcSingleHostingPlanName')]",
               "singleHostingPlanName": "[parameters('singleHostingPlanName')]",

@@ -4,7 +4,6 @@
   "variables": {
     "webApiVersion": "2016-08-01",
     "searchApiVersion": "2015-08-19",
-    "appInsightsApiVersion": "2015-05-01",
 
     "sqlServerFqdnTidy": "[toLower(trim(parameters('sqlServerFqdn')))]",
 
@@ -20,8 +19,6 @@
 
     "searchServiceNameTidy": "[toLower(trim(parameters('searchServiceName')))]",
     "xcSearchIndexNameTidy": "[toLower(trim(parameters('xcSearchIndexName')))]",
-    "appInsightsNameTidy": "[toLower(trim(parameters('applicationInsightsName')))]"
-
 
   },
   "parameters": {
@@ -164,12 +161,6 @@
       "defaultValue": "xdb"
     },
 
-    "applicationInsightsName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-ai')]"
-    },
-
     "xcSingleWebAppName": {
       "type": "string",
       "minLength": 1,
@@ -248,7 +239,6 @@
           "Collection Search Index Name": "[variables('xcSearchIndexNameTidy')]",
           "Collection Search Query Api Key": "[listAdminKeys(resourceId('Microsoft.Search/searchServices', variables('searchServiceNameTidy')), variables('searchApiVersion')).primaryKey]",
           "Collection Search Worker Api Key": "[listAdminKeys(resourceId('Microsoft.Search/searchServices', variables('searchServiceNameTidy')), variables('searchApiVersion')).primaryKey]",
-          "XConnect Server Application Insights Key": "[reference(resourceId('Microsoft.Insights/Components', variables('appInsightsNameTidy')), variables('appInsightsApiVersion')).InstrumentationKey]",
           "XConnect Server Instance Name": "XConnectSingle",
           "License Xml": "[parameters('licenseXml')]"
         }

@@ -6,7 +6,6 @@
     "serverFarmApiVersion": "2016-09-01",
     "dbApiVersion": "2014-04-01-preview",
     "searchApiVersion": "2015-08-19",
-    "applicationInsightsApiVersion": "2015-05-01",
     "certificateApiVersion": "2014-11-01",
 
     "sqlServerNameTidy": "[toLower(trim(parameters('sqlServerName')))]",
@@ -21,13 +20,11 @@
     "exmMasterSqlDatabaseNameTidy": "[toLower(trim(parameters('exmMasterSqlDatabaseName')))]",
 
     "singleHostingPlanNameTidy": "[toLower(trim(parameters('singleHostingPlanName')))]",
+    "CDHostingPlanNameTidy": "[toLower(trim(parameters('CDHostingPlanName')))]",
 
     "singleWebAppNameTidy": "[toLower(trim(parameters('singleWebAppName')))]",
 
     "searchServiceNameTidy": "[toLower(trim(parameters('searchServiceName')))]",
-    "applicationInsightsNameTidy": "[toLower(trim(parameters('applicationInsightsName')))]",
-    "applicationInsightsPricePlanTidy": "[toLower(trim(parameters('applicationInsightsPricePlan')))]",
-
     "authCertificateNameTidy": "[toLower(trim(parameters('authCertificateName')))]",
 
     "sitecoreTags": {
@@ -40,7 +37,7 @@
       "pools": "prc-pools",
       "tasks": "prc-tasks",
       "forms": "forms",
-      "exmmaster" : "exmmaster"
+      "exmmaster": "exmmaster"
     }
   },
   "parameters": {
@@ -144,7 +141,7 @@
       "type": "bool",
       "defaultValue": true
     },
-    
+
     "searchServiceName": {
       "type": "string",
       "defaultValue": "[concat(parameters('deploymentId'), '-as')]"
@@ -166,34 +163,15 @@
       "defaultValue": 1
     },
 
-    "applicationInsightsName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-ai')]"
-    },
-    "applicationInsightsLocation": {
-      "type": "string",
-      "defaultValue": "East US"
-    },
-    "applicationInsightsPricePlan": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-ai-pp')]"
-    },
-    "applicationInsightsCurrentBillingFeatures": {
-      "type": "string",
-      "defaultValue": "Basic",
-      "allowedValues": [ "Basic", "Application Insights Enterprise" ]
-    },
-    "applicationInsightsDataVolumeCap": {
-      "type": "string",
-      "defaultValue": "0.33"
-    },
-
     "singleHostingPlanName": {
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-single-hp')]"
+    },
+    "CDHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-single-CD')]"
     },
     "singleHostingPlanSkuName": {
       "type": "string",
@@ -234,6 +212,23 @@
       },
       "properties": {
         "name": "[variables('singleHostingPlanNameTidy')]"
+      },
+      "location": "[parameters('location')]",
+      "tags": {
+        "provider": "[variables('sitecoreTags').provider]",
+        "logicalName": "[variables('sitecoreTags').single]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "name": "[variables('CDHostingPlanNameTidy')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
+      "sku": {
+        "name": "[parameters('singleHostingPlanSkuName')]",
+        "capacity": "[parameters('singleHostingPlanSkuCapacity')]"
+      },
+      "properties": {
+        "name": "[variables('CDHostingPlanNameTidy')]"
       },
       "location": "[parameters('location')]",
       "tags": {
@@ -548,7 +543,7 @@
         "provider": "[variables('sitecoreTags').provider]"
       }
     },
-    
+
     {
       "type": "Microsoft.Web/certificates",
       "name": "[variables('authCertificateNameTidy')]",

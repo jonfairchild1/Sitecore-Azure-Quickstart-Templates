@@ -154,12 +154,6 @@
       "defaultValue": ""
     },
 
-    "applicationInsightsName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-ai')]"
-    },
-
     "xcSingleWebAppName": {
       "type": "string",
       "minLength": 1,
@@ -284,11 +278,6 @@
           "xcSearchIndexName": {
             "value": "[parameters('xcSearchIndexName')]"
           },
-
-          "applicationInsightsName": {
-            "value": "[parameters('applicationInsightsName')]"
-          },
-
           "xcSingleWebAppName": {
             "value": "[parameters('xcSingleWebAppName')]"
           },
@@ -406,10 +395,6 @@
 
           "xcSolrConnectionString": {
             "value": "[parameters('xcSolrConnectionString')]"
-          },
-
-          "applicationInsightsName": {
-            "value": "[parameters('applicationInsightsName')]"
           },
 
           "xcSingleWebAppName": {

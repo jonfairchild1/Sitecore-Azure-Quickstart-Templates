@@ -5,7 +5,6 @@
     "webApiVersion": "2016-03-01",
     "searchApiVersion": "2015-08-19",
     "searchPreviewApiVersion": "2015-02-28-preview",
-    "applicationInsightsApiVersion": "2015-05-01",
     "sqlServerFqdnTidy": "[trim(toLower(parameters('sqlServerFqdn')))]",
     "coreSqlDatabaseNameTidy": "[toLower(trim(parameters('coreSqlDatabaseName')))]",
     "webSqlDatabaseNameTidy": "[toLower(trim(parameters('webSqlDatabaseName')))]",
@@ -21,7 +20,6 @@
     "xcSingleWebAppNameTidy": "[toLower(trim(parameters('xcSingleWebAppName')))]",
     "searchProvider": "[if(empty(parameters('solrConnectionString')), 'Azure', 'Solr')]",
     "searchServiceNameTidy": "[toLower(trim(parameters('searchServiceName')))]",
-    "applicationInsightsNameTidy": "[toLower(trim(parameters('applicationInsightsName')))]"
   },
   "parameters": {
     "infrastructure": {
@@ -218,11 +216,6 @@
       "type": "securestring",
       "defaultValue": ""
     },
-    "applicationInsightsName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-ai')]"
-    },
     "singleWebAppName": {
       "type": "string",
       "minLength": 1,
@@ -326,8 +319,6 @@
               "Cloud Search Connection String": "[if(equals(variables('searchProvider'), 'Azure'), concat('serviceUrl=https://', variables('searchServiceNameTidy'), '.search.windows.net;apiVersion=', variables('searchPreviewApiVersion'), ';apiKey=', listAdminKeys(resourceId('Microsoft.Search/searchServices', variables('searchServiceNameTidy')), variables('searchApiVersion')).primaryKey), '')]",
               "SOLR Connection String": "[parameters('solrConnectionString')]",
               "Messaging Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('messagingSqlDatabaseNameTidy'),';User Id=', parameters('messagingSqlDatabaseUserName'), ';Password=', parameters('messagingSqlDatabasePassword'), ';')]",
-              "Application Insights Instrumentation Key": "[reference(resourceId('Microsoft.Insights/Components', variables('applicationInsightsNameTidy')), variables('applicationInsightsApiVersion')).InstrumentationKey]",
-              "Application Insights Role": "Single",
               "XConnect Collection": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('xcSingleWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
               "XDB Reference Data Client": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('xcSingleWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
               "XDB MA Reporting Client": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('xcSingleWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",

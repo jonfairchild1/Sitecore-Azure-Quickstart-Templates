@@ -26,6 +26,9 @@
     "xcSingleMsDeployPackageUrl": {
       "value": "https://nmaltsevastorage.blob.core.windows.net/sitecore-wdp/Sitecore 9.0.2 rev. 180604 (Cloud)_xp0xconnect.scwdp.zip"
     },
+    "cdMsDeployPackageUrl": {
+      "value": "https://gesitecorefiles.blob.core.windows.net/902/Sitecore 9.0.2 rev. 180604 (Cloud)_cd.scwdp.zip"
+    },
     "authCertificateBlob": {
       "value": ""
     },

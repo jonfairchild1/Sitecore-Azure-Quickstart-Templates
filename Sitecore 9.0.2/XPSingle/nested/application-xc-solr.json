@@ -3,8 +3,6 @@
   "contentVersion": "1.0.0.0",
   "variables": {
     "webApiVersion": "2016-08-01",
-    "appInsightsApiVersion": "2015-05-01",
-
     "sqlServerFqdnTidy": "[toLower(trim(parameters('sqlServerFqdn')))]",
 
     "poolsSqlDatabaseNameTidy": "[toLower(trim(parameters('poolsSqlDatabaseName')))]",
@@ -18,7 +16,6 @@
     "xcSingleWebAppNameTidy": "[toLower(trim(parameters('xcSingleWebAppName')))]",
 
     "xcSearchIndexNameTidy": "[toLower(trim(parameters('xcSearchIndexName')))]",
-    "appInsightsNameTidy": "[toLower(trim(parameters('applicationInsightsName')))]",
 
     "xcSolrConnectionStringTidy": "[trim(parameters('xcSolrConnectionString'))]",
     "xcSolrConnectionStringBaseUri": "[trim(first(split(variables('xcSolrConnectionStringTidy'), ';')))]",
@@ -166,12 +163,6 @@
       "minLength": 1
     },
 
-    "applicationInsightsName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-ai')]"
-    },
-
     "xcSingleWebAppName": {
       "type": "string",
       "minLength": 1,
@@ -246,7 +237,6 @@
           "Messaging Database Application User Name": "[parameters('messagingSqlDatabaseUserName')]",
           "Messaging Database Application User Password": "[parameters('messagingSqlDatabasePassword')]",
           "Allow Invalid Client Certificates": "[parameters('allowInvalidClientCertificates')]",
-          "XConnect Server Application Insights Key": "[reference(resourceId('Microsoft.Insights/Components', variables('appInsightsNameTidy')), variables('appInsightsApiVersion')).InstrumentationKey]",
           "XConnect Server Instance Name": "XConnectSingle",
           "License Xml": "[parameters('licenseXml')]",
           "Search SOLR Core Application Connection String": "[variables('xcSolrConnectionString')]"
