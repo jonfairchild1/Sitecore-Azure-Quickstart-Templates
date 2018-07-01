@@ -548,37 +548,7 @@
         "provider": "[variables('sitecoreTags').provider]"
       }
     },
-    {
-      "type": "Microsoft.Insights/Components",
-      "name": "[variables('applicationInsightsNameTidy')]",
-      "apiVersion": "[variables('applicationInsightsApiVersion')]",
-      "location": "[parameters('applicationInsightsLocation')]",
-      "properties": {
-        "ApplicationId": "[variables('applicationInsightsNameTidy')]",
-        "Application_Type": "web"
-      },
-      "tags": {
-        "provider": "[variables('sitecoreTags').provider]"
-      }
-    },
-    {
-      "type": "Microsoft.Insights/Components/CurrentBillingFeatures",
-      "name": "[concat(variables('applicationInsightsNameTidy'), '/', variables('applicationInsightsPricePlanTidy'))]",
-      "location": "[parameters('applicationInsightsLocation')]",
-      "apiVersion": "[variables('applicationInsightsApiVersion')]",
-      "properties": {
-        "CurrentBillingFeatures": "[parameters('applicationInsightsCurrentBillingFeatures')]",
-        "DataVolumeCap": {
-          "Cap": "[float(parameters('applicationInsightsDataVolumeCap'))]"
-        }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Insights/Components', variables('applicationInsightsNameTidy'))]"
-      ],
-      "tags": {
-        "provider": "[variables('sitecoreTags').provider]"
-      }
-    },
+    
     {
       "type": "Microsoft.Web/certificates",
       "name": "[variables('authCertificateNameTidy')]",

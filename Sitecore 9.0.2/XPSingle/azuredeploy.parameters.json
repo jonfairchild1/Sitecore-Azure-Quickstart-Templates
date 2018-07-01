@@ -6,31 +6,34 @@
       "value": ""
     },
     "location": {
-      "value": ""
+      "value": "east us"
     },
     "sitecoreAdminPassword": {
-      "value": ""
+      "value": "P@ssw0rd!"
     },
     "licenseXml": {
       "value": ""
     },
     "sqlServerLogin": {
-      "value": ""
+      "value": "scadmin"
     },
     "sqlServerPassword": {
-      "value": ""
+      "value": "P@ssw0rd!"
     },
     "singleMsDeployPackageUrl": {
-      "value": ""
+      "value": "https://nmaltsevastorage.blob.core.windows.net/sitecore-wdp/Sitecore%209.0.2%20rev.%20180604%20(Cloud)_single.scwdp.zip"
     },
     "xcSingleMsDeployPackageUrl": {
+      "value": "https://nmaltsevastorage.blob.core.windows.net/sitecore-wdp/Sitecore 9.0.2 rev. 180604 (Cloud)_xp0xconnect.scwdp.zip"
+    },
+    "authCertificateBlob": {
       "value": ""
     },
-    "authCertificateBlob":{
+    "authCertificatePassword": {
       "value": ""
     },
-    "authCertificatePassword":{
-      "value": ""
+    "allowInvalidClientCertificates": {
+      "value": true
     }
   }
 }
