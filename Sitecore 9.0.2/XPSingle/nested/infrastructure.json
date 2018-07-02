@@ -23,6 +23,7 @@
     "CDHostingPlanNameTidy": "[toLower(trim(parameters('CDHostingPlanName')))]",
 
     "singleWebAppNameTidy": "[toLower(trim(parameters('singleWebAppName')))]",
+    "CDWebAppNameTidy": "[toLower(trim(parameters('CDWebAppName')))]",
 
     "searchServiceNameTidy": "[toLower(trim(parameters('searchServiceName')))]",
     "authCertificateNameTidy": "[toLower(trim(parameters('authCertificateName')))]",
@@ -187,6 +188,11 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-single')]"
     },
+    "CDWebAppName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-CD')]"
+    },
     "authCertificateName": {
       "type": "string",
       "minLength": 1,
@@ -254,6 +260,30 @@
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('singleHostingPlanNameTidy'))]"
+      ],
+      "tags": {
+        "provider": "[variables('sitecoreTags').provider]",
+        "logicalName": "[variables('sitecoreTags').single]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "name": "[variables('CDWebAppNameTidy')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('CDHostingPlanNameTidy'))]",
+        "siteConfig": {
+          "use32BitWorkerProcess": false,
+          "alwaysOn": true,
+          "phpVersion": "",
+          "defaultDocuments": [
+            "index.html"
+          ]
+        }
+      },
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('CDHostingPlanNameTidy'))]"
       ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",

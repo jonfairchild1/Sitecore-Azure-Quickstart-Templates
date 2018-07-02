@@ -1,4 +1,10 @@
-﻿$thumbprint = (New-SelfSignedCertificate `
+﻿#Define parameters for deployment
+$SubscriptionId = "e9e7a362-4586-4ede-9922-3be80bf6814f"
+$password = "P@ssw0rd!"
+
+
+######Create self-signed certificate
+$thumbprint = (New-SelfSignedCertificate `
     -Subject "CN=$env:COMPUTERNAME @ Sitecore, Inc." `
     -Type SSLServerAuthentication `
     -FriendlyName "$env:USERNAME Certificate").Thumbprint
@@ -9,7 +15,15 @@ Export-PfxCertificate `
     -cert cert:\LocalMachine\MY\$thumbprint `
     -FilePath "$certificateFilePath" `
     -Password (Read-Host -Prompt "Password" -AsSecureString)
+######End self signed certificate
 
-$Secure_String_Pwd = ConvertTo-SecureString "P@ssw0rd!" -AsPlainText -Force
+####Login to Azure subscription
+Add-AzureRMAccount
+Set-AzureRMContext -SubscriptionId $SubscriptionId
+#####End login
 
-& .\deployment.ps1 -CertificatePassword $Secure_String_Pwd -CertificateRawFilePath $certificateFilePath
+
+$Secure_String_Pwd = ConvertTo-SecureString $password -AsPlainText -Force
+
+$command = .\deployment.ps1 -CertificatePassword $Secure_String_Pwd -CertificateRawFilePath $certificateFilePath
+Invoke-Expression $command 

@@ -376,6 +376,10 @@
       "type": "securestring",
       "minLength": 1
     },
+    "cdMsDeployPackageUrl": {
+      "type": "securestring",
+      "minLength": 1
+    },
     "xcSingleMsDeployPackageUrl": {
       "type": "securestring",
       "minLength": 1

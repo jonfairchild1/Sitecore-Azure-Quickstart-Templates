@@ -235,6 +235,10 @@
       "type": "securestring",
       "minLength": 1
     },
+    "cdMsDeployPackageUrl": {
+      "type": "securestring",
+      "minLength": 1
+    },
     "exmEdsProvider": {
       "type": "string",
       "minLength": 1,
